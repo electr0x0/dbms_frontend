@@ -6,8 +6,8 @@ const verticalMenuData = [
     href: '/home',
     icon: 'tabler-smart-home',
     menu: [
-      { label: 'Home2', href: '/home', icon: 'tabler-smart-home' },
-      { label: 'Home3', href: '/home', icon: 'tabler-smart-home' }
+      { label: 'Home2', href: '#', icon: 'tabler-smart-home' },
+      { label: 'Home3', href: '#', icon: 'tabler-smart-home' }
     ]
   },
   {
@@ -19,6 +19,16 @@ const verticalMenuData = [
     label: 'Reports',
     href: '/abouts',
     icon: 'tabler-info-circle'
+  },
+  {
+    label: 'Doctor',
+    href: '/doctor',
+    icon: 'tabler-stethoscope',
+    menu: [
+      { label: 'Info', href: 'doctor/doctor_info/', icon: 'tabler-user' },
+      { label: 'My Patients', href: 'doctor/your_patients/', icon: 'tabler-clipboard-list' },
+      { label: 'Dashboard', href: '#', icon: 'tabler-heart-rate-monitor' }
+    ]
   }
 ]
 
