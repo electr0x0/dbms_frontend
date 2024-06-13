@@ -12,7 +12,16 @@ const verticalMenuData = [
     icon: 'tabler-smart-home',
     menu: [
       { label: 'Health Report', href: '/patient/report/health', icon: 'tabler-report-medical' },
-      { label: 'Diagnostic Report', href: '/patient/report/diagnosis', icon: 'tabler-file-report' }
+      { label: 'Diagnostic Report', href: '/patient/report/diagnosis', icon: 'tabler-file-report' } ]
+  },
+  {
+    label: 'Doctor',
+    href: '/doctor',
+    icon: 'tabler-stethoscope',
+    menu: [
+      { label: 'Info', href: 'doctor/doctor_info/', icon: 'tabler-user' },
+      { label: 'My Patients', href: 'doctor/your_patients/', icon: 'tabler-clipboard-list' },
+      { label: 'Dashboard', href: '#', icon: 'tabler-heart-rate-monitor' }
     ]
   }
 ]
