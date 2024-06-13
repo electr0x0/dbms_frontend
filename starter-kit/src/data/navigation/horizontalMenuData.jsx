@@ -5,8 +5,13 @@ const horizontalMenuData = () => [
     icon: 'tabler-smart-home'
   },
   {
-    label: 'About',
+    label: 'Reports',
     href: '/about',
+    icon: 'tabler-info-circle'
+  },
+  {
+    label: 'Reports',
+    href: '/abouts',
     icon: 'tabler-info-circle'
   }
 ]
