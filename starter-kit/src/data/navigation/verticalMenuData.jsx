@@ -2,23 +2,18 @@ import { SubMenu, MenuItem } from '@menu/vertical-menu'
 
 const verticalMenuData = [
   {
-    label: 'Home',
-    href: '/home',
+    label: 'Dashboard',
+    href: '/patient/dashboard',
+    icon: 'tabler-smart-home'
+  },
+  {
+    label: 'Reports',
+    href: '/patient/report',
     icon: 'tabler-smart-home',
     menu: [
-      { label: 'Home2', href: '/home', icon: 'tabler-smart-home' },
-      { label: 'Home3', href: '/home', icon: 'tabler-smart-home' }
+      { label: 'Health Report', href: '/patient/report/health', icon: 'tabler-report-medical' },
+      { label: 'Diagnostic Report', href: '/patient/report/diagnosis', icon: 'tabler-file-report' }
     ]
-  },
-  {
-    label: 'Reports',
-    href: '/about',
-    icon: 'tabler-info-circle'
-  },
-  {
-    label: 'Reports',
-    href: '/abouts',
-    icon: 'tabler-info-circle'
   }
 ]
 
