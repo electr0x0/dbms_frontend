@@ -4,15 +4,16 @@ import Grid from '@mui/material/Grid'
 // Components Imports
 import CongratulationsJohn from '@/views/patient/dashboard/Congratulations'
 import StatisticsCard from '@/views/patient/dashboard/StatisticsCard'
-import LineChartProfit from '@/views/patient/dashboard/LineChartProfit'
+
 import RadialBarChart from '@/views/patient/dashboard/RadialBarChart'
 import DonutChartGeneratedLeads from '@/views/patient/dashboard/DonutChartGeneratedLeads'
 import RevenueReport from '@/views/patient/dashboard/RevenueReport'
 import EarningReports from '@/views/patient/dashboard/EarningReports'
 import PopularProducts from '@/views/patient/dashboard/PopularProducts'
-import Orders from '@/views/patient/dashboard/Orders'
+
 import Transactions from '@/views/patient/dashboard/Transactions'
 import InvoiceListTable from '@/views/patient/dashboard/InvoiceListTable'
+import SupportTracker from '@/views/patient/dashboard/SupportTracker'
 
 // Server Action Imports
 import { getServerMode } from '@core/utils/serverHelpers'
@@ -68,7 +69,14 @@ const PatientDashboard = async () => {
       <Grid item xs={12} md={8}>
         <StatisticsCard />
       </Grid>
-      <Grid item xs={12} xl={4}></Grid>
+
+      <Grid item xs={12} md={5}>
+        <SupportTracker serverMode={serverMode} />
+      </Grid>
+
+      <Grid item xs={12} md={7}>
+        <RevenueReport serverMode={serverMode} />
+      </Grid>
 
       <Grid item xs={12} lg={12}>
         <InvoiceListTable invoiceData={invoiceData} />

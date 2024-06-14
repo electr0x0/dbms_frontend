@@ -11,7 +11,9 @@ import Link from 'next/link'
 import styled from '@emotion/styled'
 
 // Component Imports
-import VuexyLogo from '@core/svg/Logo'
+import Lottie from 'lottie-react'
+
+import heart from '@assets/lotties/heart.json'
 
 // Config Imports
 import themeConfig from '@configs/themeConfig'
@@ -63,7 +65,7 @@ const Logo = () => {
   // return <Img src='/next.svg' width={100} height={25} alt='logo' /> // for example
   return (
     <Link href='/' className='flex items-center'>
-      <VuexyLogo className='text-2xl text-primary' />
+      <Lottie animationData={heart} className='text-2xl text-primary' />
       <LogoText
         ref={logoTextRef}
         isHovered={isHovered}

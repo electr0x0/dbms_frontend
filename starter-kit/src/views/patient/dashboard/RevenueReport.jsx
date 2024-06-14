@@ -24,11 +24,11 @@ import { rgbaToHex } from '@/utils/rgbaToHex'
 const AppReactApexCharts = dynamic(() => import('@/libs/styles/AppReactApexCharts'))
 
 // Vars
-const yearOptions = [new Date().getFullYear() - 1, new Date().getFullYear() - 2, new Date().getFullYear() - 3]
+const yearOptions = ['June', 'July', 'August']
 
 const barSeries = [
-  { name: 'Earning', data: [252, 203, 152, 173, 235, 299, 235, 252, 106] },
-  { name: 'Expense', data: [-128, -157, -190, -163, -89, -51, -89, -136, -190] }
+  { name: 'Calories Burned', data: [-400, -380, -370, -390, -350, -330, -340, -360, -300] },
+  { name: 'Daily Steps', data: [1200, 1100, 1050, 1150, 1000, 950, 1020, 1070, 900] }
 ]
 
 const lineSeries = [
@@ -122,7 +122,7 @@ const RevenueReport = ({ serverMode }) => {
       axisTicks: { show: false },
       crosshairs: { opacity: 0 },
       axisBorder: { show: false },
-      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+      categories: ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU', 'MO'],
       labels: {
         style: {
           colors: disabledText,
@@ -246,7 +246,7 @@ const RevenueReport = ({ serverMode }) => {
     <Card>
       <Grid container>
         <Grid item xs={12} sm={8} className='border-r'>
-          <CardHeader title='Revenue Report' />
+          <CardHeader title='Health Report' />
           <CardContent>
             <AppReactApexCharts type='bar' height={320} width='100%' series={barSeries} options={barOptions} />
           </CardContent>
@@ -259,7 +259,7 @@ const RevenueReport = ({ serverMode }) => {
               onClick={handleClick}
               endIcon={<i className='tabler-chevron-down text-xl' />}
             >
-              {new Date().getFullYear()}
+              {yearOptions[0]}
             </Button>
             <Menu
               keepMounted
@@ -276,13 +276,11 @@ const RevenueReport = ({ serverMode }) => {
               ))}
             </Menu>
             <div className='flex flex-col items-center'>
-              <Typography variant='h3'>$25,825</Typography>
-              <Typography>
-                <span className='font-medium text-textPrimary'>Budget: </span>56,800
-              </Typography>
+              <Typography variant='h3'>72 BPM</Typography>
+              <Typography>Average Heart Rate / Month</Typography>
             </div>
             <AppReactApexCharts type='line' height={80} series={lineSeries} options={lineOptions} />
-            <Button variant='contained'>Increase Budget</Button>
+            <Button variant='contained'>View Detailed</Button>
           </CardContent>
         </Grid>
       </Grid>

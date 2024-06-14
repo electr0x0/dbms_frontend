@@ -2,7 +2,7 @@
 import Login from '@views/Login'
 
 // Server Action Imports
-import { getServerMode } from '@core/utils/serverHelpers'
+import { getServerMode, getDemoName } from '@core/utils/serverHelpers'
 
 export const metadata = {
   title: 'Login',

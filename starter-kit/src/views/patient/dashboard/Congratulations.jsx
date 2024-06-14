@@ -1,9 +1,13 @@
-// MUI Imports
+'use client'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
+
+import Lottie from 'lottie-react'
+
+import logo from '@assets/lotties/patient_anim.json'
 
 const CongratulationsJohn = () => {
   return (
@@ -15,23 +19,19 @@ const CongratulationsJohn = () => {
               Welcome Patient X 🎉
             </Typography>
             <Typography variant='subtitle1' className='mbe-2'>
-              Best seller of the month
+              You had a health checkup
             </Typography>
             <Typography variant='h4' color='primary.main' className='mbe-1'>
-              $48.9k
+              4 days ago
             </Typography>
             <Button variant='contained' color='primary'>
-              View Sales
+              View all Reports
             </Button>
           </CardContent>
         </Grid>
         <Grid item xs={4}>
           <div className='relative bs-full is-full'>
-            <img
-              alt='Congratulations John'
-              src='/image'
-              className='max-bs-[150px] absolute block-end-0 inline-end-6 max-is-full'
-            />
+            <Lottie animationData={logo} />
           </div>
         </Grid>
       </Grid>

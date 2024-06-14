@@ -1,37 +1,48 @@
-// MUI Imports
+'use client'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 
+import Lottie from 'lottie-react'
+
+import heart from '@assets/lotties/wired-lineal-1249-heart-beat.json'
+import steps from '@assets/lotties/wired-lineal-1639-stairs.json'
+import chole from '@assets/lotties/wired-lineal-447-water-drop.json'
+import pressure from '@assets/lotties/steth4.json'
+
 // Component Imports
 import CustomAvatar from '@core/components/mui/Avatar'
 
 const data = [
   {
-    stats: '230k',
-    title: 'Sales',
+    stats: '72 bpm',
+    title: 'Heart Rate',
     color: 'primary',
-    icon: 'tabler-chart-pie-2'
+    icon: 'tabler-heart-rate-monitor',
+    anim: heart
   },
   {
+    stats: '120/80 mmHg',
+    title: 'Blood Pressure',
     color: 'info',
-    stats: '8.549k',
-    title: 'Customers',
-    icon: 'tabler-users'
+    icon: 'tabler-pulse',
+    anim: pressure
   },
   {
+    stats: '190 mg/dL',
+    title: 'Cholesterol',
     color: 'error',
-    stats: '1.423k',
-    title: 'Products',
-    icon: 'tabler-shopping-cart'
+    icon: 'tabler-droplet',
+    anim: chole
   },
   {
-    stats: '$9745',
+    stats: '5,000 steps',
+    title: 'Recent Activity',
     color: 'success',
-    title: 'Revenue',
-    icon: 'tabler-currency-dollar'
+    icon: 'tabler-walk',
+    anim: steps
   }
 ]
 
@@ -39,10 +50,10 @@ const StatisticsCard = () => {
   return (
     <Card>
       <CardHeader
-        title='Statistics'
+        title='Health Statistics'
         action={
           <Typography variant='subtitle2' color='text.disabled'>
-            Updated 1 month ago
+            Updated 1 hour ago
           </Typography>
         }
       />
@@ -50,8 +61,9 @@ const StatisticsCard = () => {
         <Grid container spacing={4}>
           {data.map((item, index) => (
             <Grid key={index} item xs className='flex items-center gap-4'>
-              <CustomAvatar color={item.color} variant='rounded' size={40} skin='light'>
-                <i className={item.icon}></i>
+              <CustomAvatar variant='rounded' size={40} skin='light'>
+                <Lottie animationData={item.anim} />
+                {/* <i className={item.icon}></i> */}
               </CustomAvatar>
               <div className='flex flex-col'>
                 <Typography variant='h5'>{item.stats}</Typography>

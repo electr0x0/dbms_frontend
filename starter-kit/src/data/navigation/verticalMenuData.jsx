@@ -9,10 +9,10 @@ const verticalMenuData = [
   {
     label: 'Reports',
     href: '/patient/report',
-    icon: 'tabler-smart-home',
+    icon: 'tabler-clipboard-text',
     menu: [
-      { label: 'Health Report', href: '/patient/report/health', icon: 'tabler-report-medical' },
-      { label: 'Diagnostic Report', href: '/patient/report/diagnosis', icon: 'tabler-file-report' }
+      { label: 'Health & Personal', href: '/patient/report/health', icon: 'tabler-report-medical' },
+      { label: 'Other Diagnostic', href: '/patient/report/diagnosis', icon: 'tabler-test-pipe' }
     ]
   },
   {

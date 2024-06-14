@@ -283,7 +283,7 @@ const InvoiceListTable = ({ invoiceData }) => {
           <DebouncedInput
             value={globalFilter ?? ''}
             onChange={value => setGlobalFilter(String(value))}
-            placeholder='Search Invoice'
+            placeholder='Search Appointment'
             className='is-[250px]'
           />
           <CustomTextField
@@ -294,7 +294,7 @@ const InvoiceListTable = ({ invoiceData }) => {
             className='is-[160px]'
             SelectProps={{ displayEmpty: true }}
           >
-            <MenuItem value=''>Invoice Status</MenuItem>
+            <MenuItem value=''>All</MenuItem>
             <MenuItem value='downloaded'>Downloaded</MenuItem>
             <MenuItem value='draft'>Draft</MenuItem>
             <MenuItem value='paid'>Paid</MenuItem>
