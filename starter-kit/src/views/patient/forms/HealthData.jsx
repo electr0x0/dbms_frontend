@@ -207,7 +207,7 @@ const FormLayoutsWithTabs = () => {
                     }}
                   >
                     <MenuItem value='Peanut'>Peanut</MenuItem>
-                    <MenuItem value='Dhon'>Dhon</MenuItem>
+                    <MenuItem value='X'>X Allergy</MenuItem>
                   </CustomTextField>
                 </Grid>
               </Grid>

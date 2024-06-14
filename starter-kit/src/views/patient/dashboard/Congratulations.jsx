@@ -29,7 +29,7 @@ const CongratulationsJohn = () => {
           <div className='relative bs-full is-full'>
             <img
               alt='Congratulations John'
-              src={image}
+              src='/image'
               className='max-bs-[150px] absolute block-end-0 inline-end-6 max-is-full'
             />
           </div>
