@@ -22,6 +22,7 @@ const verticalMenuData = [
     menu: [
       { label: 'Info', href: '/doctor/doctor_info/', icon: 'tabler-user' },
       { label: 'My Patients', href: '/doctor/your_patients/', icon: 'tabler-clipboard-list' },
+      { label: 'Appointments', href: '/doctor/appointments/', icon: 'tabler-calendar-clock' },
       { label: 'Dashboard', href: '#', icon: 'tabler-heart-rate-monitor' }
     ]
   }
