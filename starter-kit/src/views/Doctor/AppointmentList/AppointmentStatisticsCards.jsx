@@ -48,7 +48,7 @@ const AppointmentStatisticsCards = ({ appointmentData }) => {
   }, [appointmentData])
 
   return (
-    <Grid container spacing={6}>
+    <Grid className='mb-5' container spacing={6}>
       {statistics.map((item, index) => (
         <Grid key={index} item xs={12} sm={6} md={3}>
           <HorizontalWithSubtitle {...item} />

@@ -216,9 +216,9 @@ const DoctorAppointmentsListTable = ({ tableData }) => {
 
   return (
     <>
+      <AppointmentStatisticsCard className='mb-5' appointmentData={tableData} />
       <Card>
-        <AppointmentStatisticsCard className='mt-5' appointmentData={tableData} />
-        <CardHeader title='Filters' className='pbe-4' />
+        {/* <CardHeader title='Filters' className='pbe-4' />
         <TableFilters setData={setData} tableData={tableData} />
         <div className='flex justify-between flex-col items-start md:flex-row md:items-center p-6 border-bs gap-4'>
           <CustomTextField
@@ -247,7 +247,7 @@ const DoctorAppointmentsListTable = ({ tableData }) => {
               Add New Appointment
             </Button>
           </div>
-        </div>
+        </div> */}
         <div className='overflow-x-auto'>
           <table className={tableStyles.table}>
             <thead>

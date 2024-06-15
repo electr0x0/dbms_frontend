@@ -1,6 +1,6 @@
 import React from 'react'
 
-import DoctorAppointmentListTable from '../../../../views/Doctor/AppointmentList/DoctorAppointmentListTable'
+import AppointmentTabBased from '../../../../views/Doctor/AppointmentList/AppointmentTabBased'
 
 function DoctorAppointments() {
   // Sample patient objects
@@ -45,7 +45,7 @@ function DoctorAppointments() {
 
   return (
     <div>
-      <DoctorAppointmentListTable tableData={appointmentData} />
+      <AppointmentTabBased />
     </div>
   )
 }
