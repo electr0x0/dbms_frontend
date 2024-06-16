@@ -21,6 +21,7 @@ const AppointmentStatisticsCards = ({ appointmentData }) => {
         value: completeAppointments.length.toString(),
         avatarIcon: 'tabler-check',
         avatarColor: 'success',
+        changeNumber: '8%',
         subTitle: 'All-time'
       },
       {
@@ -28,6 +29,7 @@ const AppointmentStatisticsCards = ({ appointmentData }) => {
         value: upcoming.length.toString(),
         avatarIcon: 'tabler-calendar',
         avatarColor: 'primary',
+        changeNumber: '8%',
         subTitle: 'Upcoming'
       },
       {
@@ -35,6 +37,7 @@ const AppointmentStatisticsCards = ({ appointmentData }) => {
         value: todayAppointments.length.toString(),
         avatarIcon: 'tabler-clock',
         avatarColor: 'info',
+        changeNumber: '8%',
         subTitle: 'Today'
       },
       {
@@ -42,6 +45,7 @@ const AppointmentStatisticsCards = ({ appointmentData }) => {
         value: missedAppointments.length.toString(),
         avatarIcon: 'tabler-alert-triangle',
         avatarColor: 'error',
+        changeNumber: '8%',
         subTitle: 'Missed'
       }
     ]
