@@ -7,6 +7,11 @@ const verticalMenuData = [
     icon: 'tabler-smart-home'
   },
   {
+    label: 'Recommendation',
+    href: '/patient/recommendation',
+    icon: 'tabler-sparkles'
+  },
+  {
     label: 'Reports',
     href: '/patient/report',
     icon: 'tabler-clipboard-text',
