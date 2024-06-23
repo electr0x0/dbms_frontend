@@ -12,6 +12,9 @@ const verticalMenuData = [
     icon: 'tabler-user-heart',
     menu: [
       { label: 'Health & Personal Details', href: '/patient/report/health', icon: 'tabler-report-medical' },
+     {label: 'Recommendation',
+    href: '/patient/recommendation',
+    icon: 'tabler-sparkles'},
       { label: 'Upload Diagnostic Report', href: '/patient/report/diagnosis', icon: 'tabler-test-pipe' },
       { label: 'Appointments', href: '/patient/report/diagnosis', icon: 'tabler-calendar-week' },
       { label: 'Medicine Schedule', href: '/patient/report/diagnosis', icon: 'tabler-calendar-week' }
@@ -24,6 +27,8 @@ const verticalMenuData = [
     menu: [
       { label: 'Info', href: '/doctor/doctor_info/', icon: 'tabler-user' },
       { label: 'My Patients', href: '/doctor/your_patients/', icon: 'tabler-clipboard-list' },
+      { label: 'Appointments', href: '/doctor/appointments/', icon: 'tabler-calendar-clock' },
+      { label: 'Prescriptions', href: '/doctor/prescriptions/', icon: 'tabler-prescription' },
       { label: 'Dashboard', href: '#', icon: 'tabler-heart-rate-monitor' }
     ]
   },

@@ -36,16 +36,17 @@ import {
 } from '@tanstack/react-table'
 
 // Component Imports
-import TableFilters from '../../../views/Doctor/CurrentPaitentList/PatientTableFilter'
-import AddPatientDrawer from './AddPatientDrawer'
+import TableFilters from '../../../views/Doctor/AppointmentList/AppointmentTableFilter'
+import AddAppointmentDrawer from './AddAppointmentDrawer'
 import OptionMenu from '@core/components/option-menu'
 import TablePaginationComponent from '@components/TablePaginationComponent'
 import CustomTextField from '@core/components/mui/TextField'
 import CustomAvatar from '@core/components/mui/Avatar'
+import AppointmentStatisticsCard from './AppointmentStatisticsCards'
 
 // Util Imports
-import { getInitials } from '@/utils/getInitials'
 import { getLocalizedUrl } from '@/utils/i18n'
+import { getInitials } from '@/utils/getInitials'
 
 // Style Imports
 import tableStyles from '@core/styles/table.module.css'
@@ -79,15 +80,15 @@ const DebouncedInput = ({ value: initialValue, onChange, debounce = 500, ...prop
   return <CustomTextField {...props} value={value} onChange={e => setValue(e.target.value)} />
 }
 
-const patientStatusObj = {
-  active: 'success',
-  inactive: 'secondary'
+const appointmentTypeObj = {
+  online: 'Online',
+  physical: 'Physical'
 }
 
 const columnHelper = createColumnHelper()
 
-const PatientListTable = ({ tableData }) => {
-  const [addPatientOpen, setAddPatientOpen] = useState(false)
+const DoctorAppointmentsListTable = ({ tableData }) => {
+  const [addAppointmentOpen, setAddAppointmentOpen] = useState(false)
   const [rowSelection, setRowSelection] = useState({})
   const [data, setData] = useState(tableData)
   const [globalFilter, setGlobalFilter] = useState('')
@@ -96,78 +97,72 @@ const PatientListTable = ({ tableData }) => {
 
   const columns = useMemo(
     () => [
-      {
-        id: 'select',
-        header: ({ table }) => (
-          <Checkbox
-            {...{
-              checked: table.getIsAllRowsSelected(),
-              indeterminate: table.getIsSomeRowsSelected(),
-              onChange: table.getToggleAllRowsSelectedHandler()
-            }}
-          />
-        ),
+      columnHelper.accessor('title', {
+        header: 'Appointment Title',
         cell: ({ row }) => (
-          <Checkbox
-            {...{
-              checked: row.getIsSelected(),
-              disabled: !row.getCanSelect(),
-              indeterminate: row.getIsSomeSelected(),
-              onChange: row.getToggleSelectedHandler()
-            }}
-          />
+          <Typography color='text.primary' className='font-medium'>
+            {row.original.title}
+          </Typography>
         )
-      },
-      columnHelper.accessor('fullName', {
-        header: 'Patient',
+      }),
+      columnHelper.accessor('description', {
+        header: 'Description',
+        cell: ({ row }) => <Typography color='text.primary'>{row.original.description}</Typography>
+      }),
+      columnHelper.accessor('date', {
+        header: 'Date',
+        cell: ({ row }) => <Typography color='text.primary'>{row.original.date}</Typography>
+      }),
+      columnHelper.accessor('startTime', {
+        header: 'Start Time',
+        cell: ({ row }) => <Typography color='text.primary'>{row.original.startTime}</Typography>
+      }),
+      columnHelper.accessor('endTime', {
+        header: 'End Time',
+        cell: ({ row }) => <Typography color='text.primary'>{row.original.endTime}</Typography>
+      }),
+      columnHelper.accessor('patientName', {
+        header: 'Patient Name',
         cell: ({ row }) => (
           <div className='flex items-center gap-4'>
-            <CustomAvatar size={34}>{getInitials(row.original.fullName)}</CustomAvatar>
+            <CustomAvatar size={34}>{getInitials(row.original.patientName)}</CustomAvatar>
             <div className='flex flex-col'>
               <Typography color='text.primary' className='font-medium'>
-                {row.original.fullName}
+                {row.original.patientName}
               </Typography>
-              <Typography variant='body2'>{row.original.age} years old</Typography>
             </div>
           </div>
         )
       }),
-      columnHelper.accessor('gender', {
-        header: 'Gender',
+      columnHelper.accessor('appointmentType', {
+        header: 'Type',
         cell: ({ row }) => (
-          <Typography className='capitalize' color='text.primary'>
-            {row.original.gender}
+          <Typography color='text.primary'>{appointmentTypeObj[row.original.appointmentType]}</Typography>
+        )
+      }),
+      columnHelper.accessor('roomNumber', {
+        header: 'Room Number',
+        cell: ({ row }) => (
+          <Typography color='text.primary'>
+            {row.original.appointmentType === 'online' ? (
+              <a href={row.original.roomNumber} target='_blank' rel='noopener noreferrer'>
+                Join Online
+              </a>
+            ) : (
+              row.original.roomNumber
+            )}
           </Typography>
         )
       }),
-      columnHelper.accessor('diagnosis', {
-        header: 'Diagnosis',
+      columnHelper.accessor('done', {
+        header: 'Complete',
         cell: ({ row }) => (
-          <Typography className='capitalize' color='text.primary'>
-            {row.original.diagnosis}
-          </Typography>
-        )
-      }),
-      columnHelper.accessor('doctor', {
-        header: 'Doctor',
-        cell: ({ row }) => (
-          <Typography className='capitalize' color='text.primary'>
-            {row.original.doctor}
-          </Typography>
-        )
-      }),
-      columnHelper.accessor('status', {
-        header: 'Status',
-        cell: ({ row }) => (
-          <div className='flex items-center gap-3'>
-            <Chip
-              variant='tonal'
-              className='capitalize'
-              label={row.original.status}
-              color={patientStatusObj[row.original.status]}
-              size='small'
-            />
-          </div>
+          <Checkbox
+            checked={row.original.done}
+            onChange={() => console.log('Why are you gay')}
+            color='primary'
+            inputProps={{ 'aria-label': 'mark appointment done' }}
+          />
         )
       }),
       columnHelper.accessor('action', {
@@ -178,18 +173,13 @@ const PatientListTable = ({ tableData }) => {
               <i className='tabler-trash text-[22px] text-textSecondary' />
             </IconButton>
             <IconButton>
-              {/* <Link href={getLocalizedUrl(`apps/patient/view/${row.original.id}`, locale)} className='flex'>
+              {/* <Link href={getLocalizedUrl(`apps/appointment/view/${row.original.id}`, locale)} className='flex'>
                 <i className='tabler-eye text-[22px] text-textSecondary' />
               </Link> */}
             </IconButton>
             <OptionMenu
               iconClassName='text-[22px] text-textSecondary'
               options={[
-                {
-                  text: 'Download',
-                  icon: 'tabler-download text-[22px]',
-                  menuItemProps: { className: 'flex items-center gap-2 text-textSecondary' }
-                },
                 {
                   text: 'Edit',
                   icon: 'tabler-edit text-[22px]',
@@ -226,8 +216,9 @@ const PatientListTable = ({ tableData }) => {
 
   return (
     <>
+      <AppointmentStatisticsCard className='mb-5' appointmentData={tableData} />
       <Card>
-        <CardHeader title='Filters' className='pbe-4' />
+        {/* <CardHeader title='Filters' className='pbe-4' />
         <TableFilters setData={setData} tableData={tableData} />
         <div className='flex justify-between flex-col items-start md:flex-row md:items-center p-6 border-bs gap-4'>
           <CustomTextField
@@ -244,27 +235,19 @@ const PatientListTable = ({ tableData }) => {
             <DebouncedInput
               value={globalFilter ?? ''}
               onChange={value => setGlobalFilter(String(value))}
-              placeholder='Search Patient'
+              placeholder='Search Appointment'
               className='is-full sm:is-auto'
             />
             <Button
-              color='secondary'
-              variant='tonal'
-              startIcon={<i className='tabler-upload' />}
-              className='is-full sm:is-auto'
-            >
-              Export
-            </Button>
-            <Button
               variant='contained'
               startIcon={<i className='tabler-plus' />}
-              onClick={() => setAddPatientOpen(!addPatientOpen)}
+              onClick={() => setAddAppointmentOpen(!addAppointmentOpen)}
               className='is-full sm:is-auto'
             >
-              Add New Patient
+              Add New Appointment
             </Button>
           </div>
-        </div>
+        </div> */}
         <div className='overflow-x-auto'>
           <table className={tableStyles.table}>
             <thead>
@@ -306,9 +289,9 @@ const PatientListTable = ({ tableData }) => {
         </div>
         <TablePaginationComponent table={table} />
       </Card>
-      <AddPatientDrawer open={addPatientOpen} handleClose={() => setAddPatientOpen(false)} />
+      <AddAppointmentDrawer open={addAppointmentOpen} handleClose={() => setAddAppointmentOpen(false)} />
     </>
   )
 }
 
-export default PatientListTable
+export default DoctorAppointmentsListTable
