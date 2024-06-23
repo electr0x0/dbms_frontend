@@ -52,7 +52,12 @@ const dietData = [
       { date: '2024-03-15', text: 'Feeling more energetic.' },
       { date: '2024-05-15', text: 'Lost 3 kg, on track with goals.' }
     ],
-    description: 'A balanced diet plan to help reduce weight and improve overall fitness.'
+    description: 'A balanced diet plan to help reduce weight and improve overall fitness.',
+    exercises: [
+      { name: 'Push-ups', reps: 15, sets: 3 },
+      { name: 'Squats', reps: 20, sets: 3 },
+      { name: 'Plank', reps: '1 minute', sets: 3 }
+    ]
   },
   {
     patientName: 'Jane Smith',
@@ -68,7 +73,12 @@ const dietData = [
       { date: '2024-04-01', text: 'Gained 2 kg muscle mass.' },
       { date: '2024-10-01', text: 'Stamina has significantly improved.' }
     ],
-    description: 'A diet plan focused on muscle gain and increasing overall stamina.'
+    description: 'A diet plan focused on muscle gain and increasing overall stamina.',
+    exercises: [
+      { name: 'Deadlifts', reps: 12, sets: 4 },
+      { name: 'Pull-ups', reps: 10, sets: 3 },
+      { name: 'Leg Press', reps: 15, sets: 3 }
+    ]
   }
 ]
 

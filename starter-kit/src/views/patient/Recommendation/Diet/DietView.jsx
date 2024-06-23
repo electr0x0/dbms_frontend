@@ -28,7 +28,8 @@ const DietView = ({ dietData, open, handleClose }) => {
     description,
     weightGoal,
     otherHealthGoals,
-    feedback
+    feedback,
+    exercises // Ensure to handle scenarios where exercises might be undefined or empty
   } = dietData
 
   const handleReset = () => {
@@ -64,7 +65,11 @@ const DietView = ({ dietData, open, handleClose }) => {
               <Typography className='font-medium' color='text.primary'>
                 Diet Information
               </Typography>
-              <Typography>{`Time to Continue: ${timeToContinue.amount} ${timeToContinue.unit}`}</Typography>
+              {timeToContinue ? (
+                <Typography>{`Time to Continue: ${timeToContinue.amount} ${timeToContinue.unit}`}</Typography>
+              ) : (
+                <Typography>{`Time to Continue: Not specified`}</Typography>
+              )}
               <Typography>
                 {consultation.isNeeded
                   ? `Consultation: Every ${consultation.interval} ${consultation.unit}`
@@ -94,6 +99,23 @@ const DietView = ({ dietData, open, handleClose }) => {
               </Typography>
               <Typography>{description}</Typography>
             </Grid>
+            {exercises && exercises.length > 0 && (
+              <Grid item xs={12}>
+                <Typography className='font-medium' color='text.primary'>
+                  Exercises
+                </Typography>
+                <div className='flex gap-4'>
+                  {exercises.map((exercise, index) => (
+                    <div key={index} className='flex flex-col'>
+                      <Typography>{exercise.name}</Typography>
+                      <Typography>{`Reps: ${exercise.reps}`}</Typography>
+                      <Typography>{`Sets: ${exercise.sets}`}</Typography>
+                      {index !== exercises.length - 1 && <Divider className='mt-2 mb-2' />}
+                    </div>
+                  ))}
+                </div>
+              </Grid>
+            )}
             <Grid item xs={12}>
               <Typography className='font-medium' color='text.primary'>
                 Feedback
