@@ -7,17 +7,17 @@ const verticalMenuData = [
     icon: 'tabler-smart-home'
   },
   {
-    label: 'Recommendation',
-    href: '/patient/recommendation',
-    icon: 'tabler-sparkles'
-  },
-  {
-    label: 'Reports',
+    label: 'Patient',
     href: '/patient/report',
-    icon: 'tabler-clipboard-text',
+    icon: 'tabler-user-heart',
     menu: [
-      { label: 'Health & Personal', href: '/patient/report/health', icon: 'tabler-report-medical' },
-      { label: 'Other Diagnostic', href: '/patient/report/diagnosis', icon: 'tabler-test-pipe' }
+      { label: 'Health & Personal Details', href: '/patient/report/health', icon: 'tabler-report-medical' },
+     {label: 'Recommendation',
+    href: '/patient/recommendation',
+    icon: 'tabler-sparkles'},
+      { label: 'Upload Diagnostic Report', href: '/patient/report/diagnosis', icon: 'tabler-test-pipe' },
+      { label: 'Appointments', href: '/patient/report/diagnosis', icon: 'tabler-calendar-week' },
+      { label: 'Medicine Schedule', href: '/patient/report/diagnosis', icon: 'tabler-calendar-week' }
     ]
   },
   {
@@ -30,6 +30,48 @@ const verticalMenuData = [
       { label: 'Appointments', href: '/doctor/appointments/', icon: 'tabler-calendar-clock' },
       { label: 'Prescriptions', href: '/doctor/prescriptions/', icon: 'tabler-prescription' },
       { label: 'Dashboard', href: '#', icon: 'tabler-heart-rate-monitor' }
+    ]
+  },
+  {
+    label: 'Facility',
+    href: '/admin/facility',
+    icon: 'tabler-building-skyscraper',
+    menu: [
+      { label: 'Add New', href: '/admin/facility/add_facility', icon: 'tabler-ss' },
+      { label: 'Manage', href: '/admin/facility/manage_facility', icon: 'tabler-ussssder' }
+    ]
+  },
+  {
+    label: 'Hospital',
+    href: '/hmanager/hospital',
+    icon: 'tabler-building-hospital',
+    menu: [
+      { label: 'Manage Patients', href: '/hmanager/manage/patient/list', icon: 'tabler-health-recognition' },
+      { label: 'Patient Stats', href: '/hmanager/manage/patient/stats', icon: 'tabler-chart-pie-2' },
+      { label: 'Manage Doctors', href: '/hmanager/manage/doctor', icon: 'tabler-medical-cross' }
+    ]
+  },
+  {
+    label: 'Pharmacy',
+    href: '/pharmacy',
+    icon: 'tabler-pill',
+    menu: [
+      { label: 'View and Manage Meds', href: '/pharmacy/medicine/manage', icon: 'tabler-ss' },
+      { label: 'Create Invoice', href: '/pharmacy/create-invoice', icon: 'tabler-invoice' },
+      { label: 'Manage Orders', href: '/pharmacy/order/manage', icon: 'tabler-ss' }
+    ]
+  },
+  {
+    label: 'Diagnostic Center',
+    href: '/pharmacy',
+    icon: 'tabler-stethoscope',
+    menu: [
+      { label: 'Dashboard', href: '/hmanager/manage/patient/list', icon: 'tabler-ss' },
+      { label: 'Test - Add Test', href: '/hmanager/manage/patient/list', icon: 'tabler-ss' },
+      { label: 'Test - Manage All', href: '/hmanager/manage/patient/list', icon: 'tabler-ss' },
+      { label: 'Test Requests - View', href: '/hmanager/manage/patient/list', icon: 'tabler-ss' },
+      { label: 'Test Requests - Manage', href: '/hmanager/manage/patient/list', icon: 'tabler-ss' },
+      { label: 'History - All Test History', href: '/hmanager/manage/patient/list', icon: 'tabler-ss' }
     ]
   }
 ]
