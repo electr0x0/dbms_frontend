@@ -22,22 +22,24 @@ import classnames from 'classnames'
 
 // Component Imports
 import AddPatientDrawer, { initialFormData } from '../CurrentPaitentList/AddPatientDrawer'
-import Logo from '@components/layout/shared/Logo'
 import CustomTextField from '@core/components/mui/TextField'
 
 // Styled Component Imports
 import AppReactDatepicker from '@/libs/styles/AppReactDatepicker'
+
+// Import OpenDialogOnElementClick and DietRecommendationForm
+import OpenDialogOnElementClick from '../../../components/dialogue/OpenDialogOnElementClick'
+import DietRecommendationForm from './DietRecommendationForm'
+import DietView from '../../patient/Recommendation/Diet/DietView'
 
 function PrescriptionMaker({ prescriptionData }) {
   const [open, setOpen] = useState(false)
   const [count, setCount] = useState(1)
   const [selectData, setSelectData] = useState(null)
   const [issuedDate, setIssuedDate] = useState(null)
-  const [dueDate, setDueDate] = useState(null)
   const [formData, setFormData] = useState(initialFormData)
-
-  const [timesPerDay, setTimesPerDay] = useState(0)
-  const [timesOfDay, setTimesOfDay] = useState([])
+  const [medicines, setMedicines] = useState([{ timesPerDay: 0, timesOfDay: [] }])
+  const [dietAdded, setDietAdded] = useState(false) // State to track if diet is added
 
   // Hooks
   const isBelowMdScreen = useMediaQuery(theme => theme.breakpoints.down('md'))
@@ -47,27 +49,40 @@ function PrescriptionMaker({ prescriptionData }) {
     setFormData(data)
   }
 
-  const deleteForm = e => {
-    e.preventDefault()
-
-    // @ts-ignore
-    e.target.closest('.repeater-item').remove()
+  const deleteForm = index => {
+    setMedicines(medicines.filter((_, i) => i !== index))
   }
 
-  const handleTimesPerDayChange = event => {
+  const handleTimesPerDayChange = (index, event) => {
     const value = parseInt(event.target.value)
+    const newMedicines = [...medicines]
 
-    setTimesPerDay(value)
-
-    // Initialize timesOfDay array with empty strings based on timesPerDay
-    setTimesOfDay(new Array(value).fill(''))
+    newMedicines[index].timesPerDay = value
+    newMedicines[index].timesOfDay = new Array(value).fill('')
+    setMedicines(newMedicines)
   }
 
-  const handleTimesOfDayChange = (event, index) => {
-    const newtimesOfDay = [...timesOfDay]
+  const handleTimesOfDayChange = (medicineIndex, timeIndex, event) => {
+    const newMedicines = [...medicines]
 
-    newtimesOfDay[index] = event.target.value
-    setTimesOfDay(newtimesOfDay)
+    newMedicines[medicineIndex].timesOfDay[timeIndex] = event.target.value
+    setMedicines(newMedicines)
+  }
+
+  const addMedicine = () => {
+    setMedicines([...medicines, { timesPerDay: 0, timesOfDay: [] }])
+    setCount(count + 1)
+  }
+
+  const handleDietSubmit = data => {
+    // Handle diet data submission logic here
+    setDietAdded(true)
+  }
+
+  const [openDietForm, setOpenDietForm] = useState(false)
+
+  const handleDietViewOpen = () => {
+    setOpenDietForm(true)
   }
 
   return (
@@ -214,7 +229,7 @@ function PrescriptionMaker({ prescriptionData }) {
               <Divider className='border-dashed' />
             </Grid>
             <Grid item xs={12}>
-              {Array.from(Array(count).keys()).map((item, index) => (
+              {medicines.map((medicine, index) => (
                 <div
                   key={index}
                   className={classnames('repeater-item flex relative mbe-4 border rounded w-full', {
@@ -281,20 +296,20 @@ function PrescriptionMaker({ prescriptionData }) {
                       <CustomTextField
                         {...(isBelowMdScreen ? { fullWidth: true } : { style: { width: '50%' } })}
                         type='number'
-                        value={timesPerDay}
-                        onChange={handleTimesPerDayChange}
+                        value={medicine.timesPerDay}
+                        onChange={event => handleTimesPerDayChange(index, event)}
                         placeholder='1, 2, etc.'
                         InputProps={{ inputProps: { min: 0 } }}
                       />
                     </Grid>
-                    {timesOfDay.map((timeOfDay, timeIndex) => (
+                    {medicine.timesOfDay.map((timeOfDay, timeIndex) => (
                       <Grid key={timeIndex} item lg={2} md={3} xs={12}>
                         <Typography className='font-medium '>Time of Day {timeIndex + 1}</Typography>
                         <CustomTextField
                           select
                           fullWidth
                           value={timeOfDay}
-                          onChange={event => handleTimesOfDayChange(event, timeIndex)}
+                          onChange={event => handleTimesOfDayChange(index, timeIndex, event)}
                           className='mbe-5'
                         >
                           <MenuItem value='Morning'>Morning</MenuItem>
@@ -306,7 +321,7 @@ function PrescriptionMaker({ prescriptionData }) {
                     ))}
                   </Grid>
                   <div className='flex flex-col justify-start border-is'>
-                    <IconButton size='small' onClick={deleteForm}>
+                    <IconButton size='small' onClick={() => deleteForm(index)}>
                       <i className='tabler-x text-actionActive' />
                     </IconButton>
                   </div>
@@ -316,12 +331,36 @@ function PrescriptionMaker({ prescriptionData }) {
                 <Button
                   size='small'
                   variant='contained'
-                  onClick={() => setCount(count + 1)}
+                  onClick={addMedicine}
                   startIcon={<i className='tabler-plus' />}
                 >
                   Add Medicine
                 </Button>
               </Grid>
+              {/* Render Diet View if diet is added */}
+              {dietAdded && <DietView dietData={openDietForm} />}
+              {console.log(openDietForm)}
+              {!dietAdded && (
+                <Grid item xs={12} className='mt-4'>
+                  <OpenDialogOnElementClick
+                    element={Button}
+                    elementProps={{
+                      variant: 'contained',
+                      onClick: handleDietViewOpen,
+                      children: 'Add Diet'
+                    }}
+                    dialog={DietRecommendationForm}
+                    dialogProps={{
+                      open: openDietForm,
+                      setOpen: setOpenDietForm,
+                      onSubmit: handleDietSubmit,
+                      doctorName: 'José Mourinho',
+                      patientName: 'Russel Viper',
+                      currentWeight: 75
+                    }}
+                  />
+                </Grid>
+              )}
             </Grid>
           </Grid>
         </CardContent>

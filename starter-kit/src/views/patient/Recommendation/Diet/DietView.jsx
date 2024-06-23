@@ -28,12 +28,15 @@ const DietView = ({ dietData, open, handleClose }) => {
     description,
     weightGoal,
     otherHealthGoals,
-    feedback
+    feedback,
+    exercises // New data field for exercises
   } = dietData
 
   const handleReset = () => {
     handleClose()
   }
+
+  console.log(dietData, 'from view')
 
   return (
     <Drawer
@@ -64,7 +67,11 @@ const DietView = ({ dietData, open, handleClose }) => {
               <Typography className='font-medium' color='text.primary'>
                 Diet Information
               </Typography>
-              <Typography>{`Time to Continue: ${timeToContinue.amount} ${timeToContinue.unit}`}</Typography>
+              {timeToContinue ? (
+                <Typography>{`Time to Continue: ${timeToContinue.amount} ${timeToContinue.unit}`}</Typography>
+              ) : (
+                <Typography>{`Time to Continue: Not specified`}</Typography>
+              )}
               <Typography>
                 {consultation.isNeeded
                   ? `Consultation: Every ${consultation.interval} ${consultation.unit}`
@@ -93,6 +100,19 @@ const DietView = ({ dietData, open, handleClose }) => {
                 Description
               </Typography>
               <Typography>{description}</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography className='font-medium' color='text.primary'>
+                Exercises
+              </Typography>
+              {exercises.map((exercise, index) => (
+                <div key={index}>
+                  <Typography>{exercise.name}</Typography>
+                  <Typography>{`Reps: ${exercise.reps}`}</Typography>
+                  <Typography>{`Sets: ${exercise.sets}`}</Typography>
+                  <Divider className='mt-2 mb-2' />
+                </div>
+              ))}
             </Grid>
             <Grid item xs={12}>
               <Typography className='font-medium' color='text.primary'>
