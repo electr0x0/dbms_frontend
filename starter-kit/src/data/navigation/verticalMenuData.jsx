@@ -41,9 +41,9 @@ const verticalMenuData = [
     href: '/hmanager/hospital',
     icon: 'tabler-building-hospital',
     menu: [
-      { label: 'Manage Patients', href: '/hmanager/manage/patient/list', icon: 'tabler-ss' },
-      { label: 'Manage Doctors', href: '/hmanager/manage/doctor/list', icon: 'tabler-ss' },
-      { label: 'Bed Allocation', href: '/admin/manage/bed/allocate', icon: 'tabler-ussssder' }
+      { label: 'Manage Patients', href: '/hmanager/manage/patient/list', icon: 'tabler-health-recognition' },
+      { label: 'Patient Stats', href: '/hmanager/manage/patient/stats', icon: 'tabler-chart-pie-2' },
+      { label: 'Manage Doctors', href: '/hmanager/manage/doctor', icon: 'tabler-medical-cross' }
     ]
   },
   {
@@ -51,12 +51,9 @@ const verticalMenuData = [
     href: '/pharmacy',
     icon: 'tabler-pill',
     menu: [
-      { label: 'Dashboard', href: '/hmanager/manage/patient/list', icon: 'tabler-ss' },
-      { label: 'Add New Meds', href: '/hmanager/manage/patient/list', icon: 'tabler-ss' },
-      { label: 'View and Manage Meds', href: '/hmanager/manage/patient/list', icon: 'tabler-ss' },
-      { label: 'Create Invoice', href: '/hmanager/manage/patient/list', icon: 'tabler-ss' },
-      { label: 'Manage Orders', href: '/hmanager/manage/patient/list', icon: 'tabler-ss' },
-      { label: 'Stock Requests', href: '/hmanager/manage/patient/list', icon: 'tabler-ss' }
+      { label: 'View and Manage Meds', href: '/pharmacy/medicine/manage', icon: 'tabler-ss' },
+      { label: 'Create Invoice', href: '/pharmacy/create-invoice', icon: 'tabler-invoice' },
+      { label: 'Manage Orders', href: '/pharmacy/order/manage', icon: 'tabler-ss' }
     ]
   },
   {
