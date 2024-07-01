@@ -44,7 +44,9 @@
     "react-perfect-scrollbar": "1.5.8",
     "react-toastify": "10.0.4",
     "react-use": "17.5.0",
-    "server-only": "0.0.1"
+    "server-only": "0.0.1",
+    "react-draft-wysiwyg":"1.15.0",
+    "recharts":"2.12.7"
   },
   "devDependencies": {
     "@iconify/tools": "4.0.2",
