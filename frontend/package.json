@@ -24,7 +24,9 @@
     "@mui/material-nextjs": "5.15.11",
     "@tanstack/match-sorter-utils": "^8.15.1",
     "@tanstack/react-table": "^8.17.3",
+    "axios": "^1.7.2",
     "classnames": "2.5.1",
+    "formik": "^2.4.6",
     "i18n": "^0.15.1",
     "leaflet": "^1.9.4",
     "leaflet-geosearch": "^4.0.0",
@@ -44,7 +46,9 @@
     "react-perfect-scrollbar": "1.5.8",
     "react-toastify": "10.0.4",
     "react-use": "17.5.0",
-    "server-only": "0.0.1"
+    "server-only": "0.0.1",
+    "sweetalert2": "^11.12.2",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@iconify/tools": "4.0.2",
