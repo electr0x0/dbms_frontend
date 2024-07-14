@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { fetchDoctorData, updateDoctorData } from '../../api/DoctorApiRequests'
 
 // MUI Imports
 import Card from '@mui/material/Card'
@@ -22,29 +23,58 @@ const DoctorInfoForm = () => {
   const [formData, setFormData] = useState({
     username: '',
     department: '',
-    specialization: [specializationOptions[0]],
+    specialization: specializationOptions[0],
     yearsOfExperience: '',
     dutyHours: '',
     roomNumber: ''
   })
 
+  useEffect(() => {
+    const getDoctorData = async () => {
+      console.log("hello")
+      try {
+        const result = await fetchDoctorData(4); // Assuming doctorId is 4
+        setFormData({
+          username: result.data.doctor_name,
+          department: result.data.department,
+          specialization: result.data.specialization,
+          yearsOfExperience: result.data.years_of_experience,
+          dutyHours: result.data.daily_hours,
+          roomNumber: result.data.room_number
+        })
+      } catch (error) {
+        console.error('Error fetching doctor data:', error)
+      }
+    }
+
+    getDoctorData()
+  }, [])
+
   const handleInputChange = e => {
     const { name, value } = e.target
-
     setFormData({ ...formData, [name]: value })
   }
 
   const handleSpecializationChange = e => {
     const { value } = e.target
+    setFormData({ ...formData, specialization: value })
+  }
 
-    setFormData({ ...formData, specialization: typeof value === 'string' ? value.split(',') : value })
+  const handleSubmit = async e => {
+    e.preventDefault()
+    try {
+      const result = await updateDoctorData(4, formData); // Assuming doctorId is 4
+      console.log('Doctor details updated successfully:', result)
+    } catch (error) {
+      console.error('Error updating doctor details:', error)
+    }
   }
 
   const handleReset = () => {
     setFormData({
       username: '',
       department: '',
-      specialization: [],
+      specialization: specializationOptions[0],
       yearsOfExperience: '',
       dutyHours: '',
       roomNumber: ''
@@ -55,7 +85,7 @@ const DoctorInfoForm = () => {
     <Card>
       <CardHeader title='Your Info' />
       <Divider />
-      <form onSubmit={e => e.preventDefault()}>
+      <form onSubmit={handleSubmit}>
         <CardContent>
           <Grid container spacing={6}>
             <Grid item xs={12}>
@@ -86,7 +116,6 @@ const DoctorInfoForm = () => {
             <Grid item xs={12} sm={6}>
               <CustomTextField
                 select
-                defaultValue={specializationOptions[0]}
                 fullWidth
                 label='Specialization'
                 name='specialization'
@@ -137,6 +166,9 @@ const DoctorInfoForm = () => {
         <CardActions>
           <Button type='submit' variant='contained' className='mie-2'>
             Submit
+          </Button>
+          <Button type='button' variant='outlined' onClick={handleReset}>
+            Reset
           </Button>
         </CardActions>
       </form>
